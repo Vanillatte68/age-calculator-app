@@ -1,5 +1,4 @@
 // variables
-
 var day = document.getElementById("day");
 var month = document.getElementById("month");
 var year = document.getElementById("year");
@@ -7,6 +6,8 @@ let btnSubmit = document.getElementById("btn");
 var errorDay = document.getElementById("error-day");
 var errorMonth = document.getElementById("error-month");
 var errorYear = document.getElementById("error-year");
+
+// get current date
 var date = new Date();
 var currentDay = date.getDate();
 var currentMonth = date.getMonth() + 1;
@@ -14,8 +15,11 @@ var currentYear = date.getFullYear();
 
 // validate input onchange
 function dayValidate() {
+  // get number of days of the month
+  let dateOfTheMonth = new Date(year.value, month.value, 0).getDate();
+
   let dayLabel = document.getElementById("day-label");
-  if (day.value == 0 || day.value > 31) {
+  if (day.value == 0 || day.value > dateOfTheMonth) {
     day.classList.add("error-border");
     errorDay.style.display = "block";
     errorDay.innerHTML = "Must be a valid day";
@@ -83,8 +87,9 @@ btnSubmit.addEventListener("click", function () {
   let outputDay = document.getElementById("day-output");
   let outputMonth = document.getElementById("month-output");
   let outputYear = document.getElementById("year-output");
-  var dob = new Date(year.value, month.value, day.value);
 
+  // get user input date
+  var dob = new Date(year.value, month.value, day.value);
   let dobDay = dob.getDate();
   let dobMonth = dob.getMonth();
   let dobYear = dob.getFullYear();
